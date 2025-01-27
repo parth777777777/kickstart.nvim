@@ -242,6 +242,35 @@ require('lazy').setup({
   --    require('gitsigns').setup({ ... })
   --
   -- See `:help gitsigns` to understand what the configuration keys do
+  {
+    'catppuccin/nvim', -- Specify the plugin repository
+    as = 'catppuccin', -- Optional alias for the plugin
+    config = function()
+      -- Optionally, set the flavour (dark or light variants)frappe
+      vim.g.catppuccin_flavour = 'latte' -- Can be "latte", "frappe", "mocha", or "macchiato"
+      local latte = require('catppuccin.palettes').get_palette 'latte'
+      local frappe = require('catppuccin.palettes').get_palette 'frappe'
+      local macchiato = require('catppuccin.palettes').get_palette 'macchiato'
+      local mocha = require('catppuccin.palettes').get_palette 'mocha'
+      -- Apply the colorscheme
+      vim.cmd 'colorscheme catppuccin'
+
+      require('catppuccin').setup {
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          nvimtree = true,
+          treesitter = true,
+          notify = false,
+          mini = {
+            enabled = true,
+            indentscope_color = '',
+          },
+        },
+      }
+    end,
+  },
+
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
